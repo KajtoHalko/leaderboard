@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ListProcessingService {
@@ -28,10 +26,24 @@ public class ListProcessingService {
             List<ScoreEntry> list = Arrays.asList(mapper.readValue(jsonAsString, ScoreEntry[].class));
             scoreEntries.addAll(list);
         } catch (Exception e) {
-
+            //handle exception
         }
 
+        scoreEntries.sort((o1, o2) -> o2.getScore().compareTo(o1.getScore()));
         return scoreEntries;
+    }
+
+    public List<ScoreEntry> getNewScores() {
+        //todo call REST endpoint for new scores
+        //dummy insert
+        return Collections.singletonList(new ScoreEntry("Dwight", 9999L));
+    }
+
+    public LinkedList<ScoreEntry> updateLeaderboard(LinkedList<ScoreEntry> leaderboard, List<ScoreEntry> newScores) {
+        newScores.forEach(newScore -> {
+            //todo handle adding new scores
+        });
+        return leaderboard;
     }
 
 }
