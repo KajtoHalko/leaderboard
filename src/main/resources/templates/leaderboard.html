@@ -13,7 +13,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entry : ${scoresList}">
+    <tr th:each="entry : ${session.scoresList}">
         <td th:text="${entry.name}"></td>
         <td th:text="${entry.score}"></td>
     </tr>
@@ -22,6 +22,9 @@
         <label for="playerNameInput">Search for player:</label>
         <input id="playerNameInput" type="text" name="playerNameInput" th:value="${playerName}" />
         <button type="submit">Search</button>
+    </form>
+    <form th:action="@{/refresh}" method="post">
+        <button type="submit">Refresh</button>
     </form>
 
 </table>
