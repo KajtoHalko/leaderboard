@@ -18,8 +18,10 @@
         <td th:text="${entry.score}"></td>
     </tr>
     </tbody>
-    <form th:action="@{/update}" th:object="${scoresList}" method="post">
-        <button type="submit">Update</button>
+    <form th:action="@{/findPlayer}" method="post">
+        <label for="playerNameInput">Search for player:</label>
+        <input id="playerNameInput" type="text" name="playerNameInput" th:value="${playerName}" />
+        <button type="submit">Search</button>
     </form>
 
 </table>

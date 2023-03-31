@@ -10,12 +10,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service
-public class ListProcessingService {
+public class LeaderboardService {
 
     public LinkedList<ScoreEntry> initializeLeaderboard() {
         LinkedList<ScoreEntry> scoreEntries = Lists.newLinkedList();
 
-        //todo map directly to object
         String jsonAsString = "";
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -33,10 +32,15 @@ public class ListProcessingService {
         return scoreEntries;
     }
 
-    public List<ScoreEntry> getNewScores() {
-        //todo call REST endpoint for new scores
-        //dummy insert
-        return Collections.singletonList(new ScoreEntry("Dwight", 9999L));
+    public LinkedList<ScoreEntry> findPlayerByName(LinkedList<ScoreEntry> scoreEntries, String playerName) {
+        Optional<ScoreEntry> specificEntry = scoreEntries
+                .stream()
+                .filter(entry -> playerName.equals(entry.getName()))
+                .findFirst();
+
+        return specificEntry
+                .map(scoreEntry -> new LinkedList<>(Collections.singletonList(scoreEntry)))
+                .orElseGet(Lists::newLinkedList);
     }
 
     public LinkedList<ScoreEntry> updateLeaderboard(LinkedList<ScoreEntry> leaderboard, List<ScoreEntry> newScores) {
