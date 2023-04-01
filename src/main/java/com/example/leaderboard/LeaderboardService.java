@@ -12,8 +12,8 @@ import java.util.*;
 @Service
 public class LeaderboardService {
 
-    public LinkedList<ScoreEntry> initializeLeaderboard() {
-        LinkedList<ScoreEntry> scoreEntries = Lists.newLinkedList();
+    public BidirectionalLinkedList initializeLeaderboard() {
+        LinkedList<ScoreEntry> linkedList = Lists.newLinkedList();
 
         String jsonAsString = "";
         ObjectMapper mapper = new ObjectMapper();
@@ -23,24 +23,29 @@ public class LeaderboardService {
 
             //todo this code below is horrible and uses addAll
             List<ScoreEntry> list = Arrays.asList(mapper.readValue(jsonAsString, ScoreEntry[].class));
-            scoreEntries.addAll(list);
+            linkedList.addAll(list);
         } catch (Exception e) {
             //handle exception
         }
 
-        scoreEntries.sort((o1, o2) -> o2.getScore().compareTo(o1.getScore()));
-        return scoreEntries;
+        linkedList.sort((o1, o2) -> o2.getScore().compareTo(o1.getScore()));
+
+        BidirectionalLinkedList resultList = new BidirectionalLinkedList();
+        linkedList.forEach(resultList::addPlayer);
+
+        return resultList;
     }
 
-    public LinkedList<ScoreEntry> findPlayerByName(LinkedList<ScoreEntry> scoreEntries, String playerName) {
-        Optional<ScoreEntry> specificEntry = scoreEntries
-                .stream()
-                .filter(entry -> playerName.equals(entry.getName()))
-                .findFirst();
-
-        return specificEntry
-                .map(scoreEntry -> new LinkedList<>(Collections.singletonList(scoreEntry)))
-                .orElseGet(Lists::newLinkedList);
+    public LinkedList<ScoreEntry> findPlayerByName(BidirectionalLinkedList scoreEntries, String playerName) {
+//        Optional<ScoreEntry> specificEntry = scoreEntries
+//                .stream()
+//                .filter(entry -> playerName.equals(entry.getName()))
+//                .findFirst();
+//
+//        return specificEntry
+//                .map(scoreEntry -> new LinkedList<>(Collections.singletonList(scoreEntry)))
+//                .orElseGet(Lists::newLinkedList);
+        return Lists.newLinkedList();
     }
 
     public LinkedList<ScoreEntry> updateLeaderboard(LinkedList<ScoreEntry> leaderboard, List<ScoreEntry> newScores) {

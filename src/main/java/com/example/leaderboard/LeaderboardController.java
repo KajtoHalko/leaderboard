@@ -19,13 +19,13 @@ public class LeaderboardController {
     @Autowired
     LeaderboardService service;
 
-    private LinkedList<ScoreEntry> scores = Lists.newLinkedList();
+    private BidirectionalLinkedList scores = new BidirectionalLinkedList();
 
     @GetMapping("/leaderboard")
     public String initialize(HttpSession session) {
         if (scores.isEmpty()) {
             scores = service.initializeLeaderboard();
-            session.setAttribute("scoresList", scores);
+            session.setAttribute("scoresList", scores.getAllNodes());
         }
         return "leaderboard";
     }
@@ -33,13 +33,13 @@ public class LeaderboardController {
     @PostMapping("/findPlayer")
     public String findPlayer(HttpServletRequest request, HttpSession session) {
         String playerName = request.getParameter("playerNameInput");
-        session.setAttribute("scoresList", service.findPlayerByName(scores, playerName));
+        //session.setAttribute("scoresList", service.findPlayerByName(scores, playerName));
         return "redirect:leaderboard";
     }
 
     @PostMapping("/refresh")
     public String refreshLeaderboard(HttpSession session) {
-        session.setAttribute("scoresList", scores);
+        session.setAttribute("scoresList", scores.getAllNodes());
         return "redirect:leaderboard";
     }
 

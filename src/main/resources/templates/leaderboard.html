@@ -14,8 +14,8 @@
     </thead>
     <tbody>
     <tr th:each="entry : ${session.scoresList}">
-        <td th:text="${entry.name}"></td>
-        <td th:text="${entry.score}"></td>
+        <td th:text="${entry.scoreEntry.name}"></td>
+        <td th:text="${entry.scoreEntry.score}"></td>
     </tr>
     </tbody>
     <form th:action="@{/findPlayer}" method="post">
