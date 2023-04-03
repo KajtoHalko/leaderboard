@@ -54,7 +54,6 @@ public class LeaderboardServiceTest {
 
         Node updatedPlayerNode = linkedList.getNodeByPlayerName(name);
 
-
         //when
         BidirectionalLinkedList result = testee.updatePlayerScore(linkedList, updatedPlayerNode, 50L);
 

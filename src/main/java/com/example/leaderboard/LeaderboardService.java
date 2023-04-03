@@ -17,13 +17,11 @@ public class LeaderboardService {
     public BidirectionalLinkedList initializeLeaderboard() {
         LinkedList<ScoreEntry> linkedList = Lists.newLinkedList();
 
-        String jsonAsString = "";
+        String jsonAsString;
         ObjectMapper mapper = new ObjectMapper();
         try {
             URL url = Resources.getResource("leaderboard_init.json");
             jsonAsString = Resources.toString(url, StandardCharsets.UTF_8);
-
-            //todo this code below is horrible and uses addAll
             List<ScoreEntry> list = Arrays.asList(mapper.readValue(jsonAsString, ScoreEntry[].class));
             linkedList.addAll(list);
         } catch (Exception e) {
