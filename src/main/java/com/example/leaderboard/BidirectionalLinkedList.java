@@ -21,6 +21,17 @@ public class BidirectionalLinkedList {
         return nodeList;
     }
 
+    public ScoreEntry getNodeByPlayerName(String playerName) {
+        Node current = first;
+        while (current != null) {
+            if (current.getScoreEntry().getName().equals(playerName)) {
+                return current.getScoreEntry();
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
     public void addPlayer(ScoreEntry scoreEntry) {
         Node newNode = new Node(scoreEntry);
         if (first == null) {
@@ -38,6 +49,7 @@ public class BidirectionalLinkedList {
     }
 
     public void updateScore(String playerName, long newScore) {
+        //todo get node for specific player
         Node current = first;
         while (current != null) {
             if (current.getScoreEntry().getName().equals(playerName)) {
@@ -45,6 +57,7 @@ public class BidirectionalLinkedList {
                 updatePosition(current);
                 break;
             }
+            //todo next or previous dependent on which direction we want to go
             current = current.getNext();
         }
     }

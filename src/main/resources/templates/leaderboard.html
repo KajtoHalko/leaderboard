@@ -20,9 +20,18 @@
     </tbody>
     <form th:action="@{/findPlayer}" method="post">
         <label for="playerNameInput">Search for player:</label>
-        <input id="playerNameInput" type="text" name="playerNameInput" th:value="${playerName}" />
+        <input id="playerNameInput" type="text" name="playerNameInput" th:value="${playerName}"/>
         <button type="submit">Search</button>
     </form>
+    <br/>
+    <form th:action="@{/editPlayer}" method="post">
+        <label for="playerNameInput">Edit score for player </label>
+<!--        todo make it display proper player name-->
+<!--        <label for="editedPlayerScoreInput" th:text:="${editedEntry.name}"/>-->
+        <input id="editedPlayerScoreInput" type="number" name="editedPlayerScoreInput" th:value="${playerScore}"/>
+        <button type="submit">Edit</button>
+    </form>
+    <br/>
     <form th:action="@{/refresh}" method="post">
         <button type="submit">Refresh</button>
     </form>

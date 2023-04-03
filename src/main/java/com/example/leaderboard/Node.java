@@ -1,8 +1,6 @@
 package com.example.leaderboard;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class Node {
@@ -12,5 +10,9 @@ public class Node {
 
     public Node(ScoreEntry scoreEntry) {
         this.scoreEntry = scoreEntry;
+    }
+    @Override
+    public String toString() {
+        return scoreEntry.toString();
     }
 }

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class LeaderboardService {
@@ -36,23 +38,13 @@ public class LeaderboardService {
         return resultList;
     }
 
-    public LinkedList<ScoreEntry> findPlayerByName(BidirectionalLinkedList scoreEntries, String playerName) {
-//        Optional<ScoreEntry> specificEntry = scoreEntries
-//                .stream()
-//                .filter(entry -> playerName.equals(entry.getName()))
-//                .findFirst();
-//
-//        return specificEntry
-//                .map(scoreEntry -> new LinkedList<>(Collections.singletonList(scoreEntry)))
-//                .orElseGet(Lists::newLinkedList);
-        return Lists.newLinkedList();
+    public ScoreEntry findPlayerByName(BidirectionalLinkedList scoreEntries, String playerName) {
+        return scoreEntries.getNodeByPlayerName(playerName);
     }
 
-    public LinkedList<ScoreEntry> updateLeaderboard(LinkedList<ScoreEntry> leaderboard, List<ScoreEntry> newScores) {
-        newScores.forEach(newScore -> {
-            //todo handle adding new scores
-        });
-        return leaderboard;
+    public BidirectionalLinkedList updatePlayerScore(BidirectionalLinkedList scoreEntries, ScoreEntry editedPlayer, Long newScore) {
+        scoreEntries.updateScore(editedPlayer.getName(), newScore);
+        return scoreEntries;
     }
 
 }
