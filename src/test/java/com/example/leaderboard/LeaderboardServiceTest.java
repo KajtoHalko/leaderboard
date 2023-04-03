@@ -33,11 +33,11 @@ public class LeaderboardServiceTest {
         linkedList.addPlayer(new ScoreEntry());
 
         //when
-        ScoreEntry result = testee.findPlayerByName(linkedList, searchedName);
+        Node result = testee.findPlayerByName(linkedList, searchedName);
 
         //then
-        assertEquals(searchedName, result.getName());
-        assertEquals(expectedScore, result.getScore());
+        assertEquals(searchedName, result.getScoreEntry().getName());
+        assertEquals(expectedScore, result.getScoreEntry().getScore());
     }
 
     @Test
@@ -52,9 +52,11 @@ public class LeaderboardServiceTest {
         linkedList.addPlayer(updatedPlayer);
         linkedList.addPlayer(new ScoreEntry("B", 10L));
 
+        Node updatedPlayerNode = linkedList.getNodeByPlayerName(name);
+
 
         //when
-        BidirectionalLinkedList result = testee.updatePlayerScore(linkedList, updatedPlayer, 50L);
+        BidirectionalLinkedList result = testee.updatePlayerScore(linkedList, updatedPlayerNode, 50L);
 
         //then
         assertEquals(3, result.getAllNodes().size());

@@ -38,12 +38,12 @@ public class LeaderboardService {
         return resultList;
     }
 
-    public ScoreEntry findPlayerByName(BidirectionalLinkedList scoreEntries, String playerName) {
+    public Node findPlayerByName(BidirectionalLinkedList scoreEntries, String playerName) {
         return scoreEntries.getNodeByPlayerName(playerName);
     }
 
-    public BidirectionalLinkedList updatePlayerScore(BidirectionalLinkedList scoreEntries, ScoreEntry editedPlayer, Long newScore) {
-        scoreEntries.updateScore(editedPlayer.getName(), newScore);
+    public BidirectionalLinkedList updatePlayerScore(BidirectionalLinkedList scoreEntries, Node editedPlayerNode, Long newScore) {
+        scoreEntries.updateScore(editedPlayerNode.getScoreEntry().getName(), newScore);
         return scoreEntries;
     }
 

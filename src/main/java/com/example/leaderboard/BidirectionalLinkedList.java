@@ -21,11 +21,11 @@ public class BidirectionalLinkedList {
         return nodeList;
     }
 
-    public ScoreEntry getNodeByPlayerName(String playerName) {
+    public Node getNodeByPlayerName(String playerName) {
         Node current = first;
         while (current != null) {
             if (current.getScoreEntry().getName().equals(playerName)) {
-                return current.getScoreEntry();
+                return current;
             }
             current = current.getNext();
         }

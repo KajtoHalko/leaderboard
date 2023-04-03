@@ -19,7 +19,7 @@ public class LeaderboardController {
     LeaderboardService service;
 
     private BidirectionalLinkedList scores = new BidirectionalLinkedList();
-    private ScoreEntry editedEntry;
+    private Node editedPlayerNode;
 
     @GetMapping("/leaderboard")
     public String initialize(HttpSession session) {
@@ -33,10 +33,10 @@ public class LeaderboardController {
     @PostMapping("/findPlayer")
     public String findPlayer(HttpServletRequest request, HttpSession session) {
         String playerName = request.getParameter("playerNameInput");
-        editedEntry = service.findPlayerByName(scores, playerName);
-        if (editedEntry != null) {
-            session.setAttribute("editedEntry", editedEntry);
-            session.setAttribute("playerScore", editedEntry.getScore());
+        editedPlayerNode = service.findPlayerByName(scores, playerName);
+        if (editedPlayerNode != null) {
+            session.setAttribute("editedEntry", editedPlayerNode.getScoreEntry());
+            session.setAttribute("playerScore", editedPlayerNode.getScoreEntry().getScore());
         }
         return "redirect:leaderboard";
     }
@@ -44,6 +44,11 @@ public class LeaderboardController {
     @PostMapping("/refresh")
     public String refreshLeaderboard(HttpSession session) {
         session.setAttribute("scoresList", scores.getAllNodes());
+        return "redirect:leaderboard";
+    }
+
+    public String updatePlayerScore() {
+        //service.updatePlayerScore(scores, )
         return "redirect:leaderboard";
     }
 
