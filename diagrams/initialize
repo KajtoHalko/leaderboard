@@ -1,0 +1,12 @@
+@startuml
+
+actor Client
+
+Client -> View: initialize
+View -> Controller: initialize
+Controller -> Service: initialize
+Service -> Service: loads input \nfile to bidirectional \nlinked list
+Service --> Controller: result list
+Controller --> View: result list
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+actor Client
+
+Client -> View: search for player \nwith name
+View -> Controller: findPlayer
+Controller -> Service: findPlayer(leaderboard, playerName)
+Service -> Service: search for player with given \nname in leaderboard and return \nit's node
+Service --> Controller: Node with ScoreEntry \nof specific player
+Controller --> View: Node
+View --> Client: put data from node \nto edit input
+View --> Client: todo: show page with \nplayer's entry
+
+@enduml

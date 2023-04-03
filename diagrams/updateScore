@@ -1,0 +1,14 @@
+@startuml
+
+actor Client
+
+Client -> View: update score
+View -> Controller: updateScore
+Controller -> Service: updatePlayerScore
+Service -> Service: update score \nupdate node position \ngiven score has changed
+Service --> Controller: message *update successful*
+Controller --> View: message *update successful*
+Controller --> View: hide edit options
+View --> Client: message *update successful*
+
+@enduml
