@@ -43,7 +43,8 @@ public class LeaderboardService {
     }
 
     public BidirectionalLinkedList updatePlayerScore(BidirectionalLinkedList scoreEntries, Node editedPlayerNode, Long newScore) {
-        scoreEntries.updateScore(editedPlayerNode.getScoreEntry().getName(), newScore);
+        editedPlayerNode.getScoreEntry().setScore(newScore);
+        scoreEntries.updateNodePosition(editedPlayerNode);
         return scoreEntries;
     }
 

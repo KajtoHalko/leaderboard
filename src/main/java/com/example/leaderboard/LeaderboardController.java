@@ -41,15 +41,18 @@ public class LeaderboardController {
         return "redirect:leaderboard";
     }
 
+    @PostMapping("/updateScore")
+    public String updatePlayerScore(HttpServletRequest request) {
+        Long newScore = Long.parseLong(request.getParameter("editedPlayerScoreInput"));
+        service.updatePlayerScore(scores, editedPlayerNode, newScore);
+        return "redirect:leaderboard";
+    }
+
     @PostMapping("/refresh")
     public String refreshLeaderboard(HttpSession session) {
         session.setAttribute("scoresList", scores.getAllNodes());
         return "redirect:leaderboard";
     }
 
-    public String updatePlayerScore() {
-        //service.updatePlayerScore(scores, )
-        return "redirect:leaderboard";
-    }
 
 }

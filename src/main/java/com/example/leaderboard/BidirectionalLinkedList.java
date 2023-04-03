@@ -48,21 +48,7 @@ public class BidirectionalLinkedList {
         size++;
     }
 
-    public void updateScore(String playerName, long newScore) {
-        //todo get node for specific player
-        Node current = first;
-        while (current != null) {
-            if (current.getScoreEntry().getName().equals(playerName)) {
-                current.getScoreEntry().setScore(newScore);
-                updatePosition(current);
-                break;
-            }
-            //todo next or previous dependent on which direction we want to go
-            current = current.getNext();
-        }
-    }
-
-    private void updatePosition(Node node) {
+    public void updateNodePosition(Node node) {
         Node current = node;
         while (current.getPrev() != null && current.getScoreEntry().getScore() > current.getPrev().getScoreEntry().getScore()) {
             swapNodes(current.getPrev(), current);
