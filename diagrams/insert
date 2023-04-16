@@ -1,0 +1,11 @@
+@startuml
+
+actor Client
+
+Client -> Controller: [POST] /insert,\nJSON with new entries\nadded as request body
+Controller -> Service: insertPlayers
+Service -> Service: iterate through new entries\nadd new players to the list\nin correct place,\nreturn list
+Service --> Controller: result list
+Controller --> Client: OK message
+
+@enduml
