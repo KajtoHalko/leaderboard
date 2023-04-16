@@ -34,7 +34,7 @@ public class LeaderboardController {
 
     @PostMapping("/insert")
     public ResponseEntity<String> insertPlayer(@RequestBody List<ScoreEntry> newEntries) {
-        leaderboard = service.insertPlayer(newEntries, leaderboard);
+        leaderboard = service.insertPlayers(newEntries, leaderboard);
         return ResponseEntity.ok("Player import has completed.");
     }
 }

@@ -36,9 +36,8 @@ public class LeaderboardService {
         return resultList;
     }
 
-    public BidirectionalLinkedList insertPlayer(List<ScoreEntry> newEntries, BidirectionalLinkedList leaderboard) {
+    public BidirectionalLinkedList insertPlayers(List<ScoreEntry> newEntries, BidirectionalLinkedList leaderboard) {
         for (ScoreEntry newEntry : newEntries) {
-            //todo add player in correct place on the list
             leaderboard.addPlayer(newEntry);
         }
         return leaderboard;

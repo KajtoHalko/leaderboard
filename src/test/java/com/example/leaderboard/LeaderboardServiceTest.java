@@ -1,9 +1,12 @@
 package com.example.leaderboard;
 
+import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +17,7 @@ public class LeaderboardServiceTest {
     private LeaderboardService testee;
 
     @Test
-    void initializeLeaderBoardTest() {
+    void initializeLeaderboardTest() {
         //when
         BidirectionalLinkedList result = testee.initializeLeaderboard();
 
@@ -23,43 +26,19 @@ public class LeaderboardServiceTest {
     }
 
     @Test
-    void findPlayerByNameTest() {
+    void insertPlayersTest() {
         //given
-        String searchedName = "A";
-        Long expectedScore = 100L;
-
-        BidirectionalLinkedList linkedList = new BidirectionalLinkedList();
-        linkedList.addPlayer(new ScoreEntry(searchedName, expectedScore));
-        linkedList.addPlayer(new ScoreEntry());
+        List<ScoreEntry> newEntries = Lists.newArrayList(
+                new ScoreEntry("Player_1", 100L),
+                new ScoreEntry("Player_2", 200L)
+        );
 
         //when
-        Node result = testee.findPlayerByName(linkedList, searchedName);
+        BidirectionalLinkedList result = testee.insertPlayers(newEntries, new BidirectionalLinkedList());
 
         //then
-        assertEquals(searchedName, result.getScoreEntry().getName());
-        assertEquals(expectedScore, result.getScoreEntry().getScore());
-    }
-
-    @Test
-    void updatePlayerScoreTest() {
-        //given
-        String name = "A";
-        Long score = 20L;
-        ScoreEntry updatedPlayer = new ScoreEntry(name, score);
-
-        BidirectionalLinkedList linkedList = new BidirectionalLinkedList();
-        linkedList.addPlayer(new ScoreEntry("C", 30L));
-        linkedList.addPlayer(updatedPlayer);
-        linkedList.addPlayer(new ScoreEntry("B", 10L));
-
-        Node updatedPlayerNode = linkedList.getNodeByPlayerName(name);
-
-        //when
-        BidirectionalLinkedList result = testee.updatePlayerScore(linkedList, updatedPlayerNode, 50L);
-
-        //then
-        assertEquals(3, result.getAllNodes().size());
-        assertEquals(name, result.getAllNodes().get(0).getScoreEntry().getName());
+        assertEquals(2, result.getAllNodes().size());
+        assertEquals(200L, result.getAllNodes().get(0).getScoreEntry().getScore());
     }
 
 }
