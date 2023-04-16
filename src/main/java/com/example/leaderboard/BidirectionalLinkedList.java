@@ -40,10 +40,24 @@ public class BidirectionalLinkedList {
             first.setPrev(null);
             last.setNext(null);
         } else {
-            last.setNext(newNode);
-            newNode.setPrev(last);
-            last = newNode;
-            last.setNext(null);
+            Node current = first;
+            while (current != null && current.getScoreEntry().getScore() >= scoreEntry.getScore()) {
+                current = current.getNext();
+            }
+            if (current == null) {
+                newNode.setPrev(last);
+                last.setNext(newNode);
+                last = newNode;
+            } else if (current == first) {
+                newNode.setNext(first);
+                first.setPrev(newNode);
+                first = newNode;
+            } else {
+                newNode.setNext(current);
+                newNode.setPrev(current.getPrev());
+                current.getPrev().setNext(newNode);
+                current.setPrev(newNode);
+            }
         }
         size++;
     }

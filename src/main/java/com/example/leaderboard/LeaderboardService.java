@@ -36,14 +36,12 @@ public class LeaderboardService {
         return resultList;
     }
 
-    public Node findPlayerByName(BidirectionalLinkedList scoreEntries, String playerName) {
-        return scoreEntries.getNodeByPlayerName(playerName);
-    }
-
-    public BidirectionalLinkedList updatePlayerScore(BidirectionalLinkedList scoreEntries, Node editedPlayerNode, Long newScore) {
-        editedPlayerNode.getScoreEntry().setScore(newScore);
-        scoreEntries.updateNodePosition(editedPlayerNode);
-        return scoreEntries;
+    public BidirectionalLinkedList insertPlayer(List<ScoreEntry> newEntries, BidirectionalLinkedList leaderboard) {
+        for (ScoreEntry newEntry : newEntries) {
+            //todo add player in correct place on the list
+            leaderboard.addPlayer(newEntry);
+        }
+        return leaderboard;
     }
 
 }
